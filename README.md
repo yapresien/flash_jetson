@@ -32,15 +32,25 @@ Step 4 - Follow seed sutdio link to download 3 tar files
 
 Step 5 - run commands to untar, untar the rootfs in side subfolder and last overwrite, set of commands as below
 cd <directory_where_the_files_are_located>
+
 tar xf Jetson_Linux_R35.1.0_aarch64.tbz2
+
 cd Linux_for_tegra/rootfs
+
 sudo tar xfp ../../Tegra_Linux_Sample-Root-Filesystem_R35.1.0_aarch64.tbz2
+
 cd ..
+
 sudo ./apply_binaries.sh
+
 cd ..
+
 sudo apt install unzip 
+
 unzip AGX-Orin-32GB-H01-JP5.0.2.zip
+
 cd Linux_for_Tegra
+
 sudo ./flash.sh jetson‐agx‐orin‐devkit mmcblk0p1
 
 See attached successful logs.
