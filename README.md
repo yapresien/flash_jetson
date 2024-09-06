@@ -54,3 +54,15 @@ cd Linux_for_Tegra
 sudo ./flash.sh jetson‐agx‐orin‐devkit mmcblk0p1
 
 See attached successful logs.
+
+
+STAGE - 2 
+For faster boot and larger disk space move the filesystem to NVME on M.2 port, use below commands
+
+>>you can use gnome-disks command on terminal.
+
+>>create disk partition from UI
+
+and run command 
+
+sudo ./change-rootfs-storage.sh /dev/nvme0n1p1
