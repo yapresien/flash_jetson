@@ -1,0 +1,66 @@
+
+
+{ sleep 2; echo first finished; } & { sleep 3; echo second finished; } &
+
+
+{ gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_1 wait-for-connection=false shm-size=100000000; } & { sleep 1; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_2 wait-for-connection=false shm-size=100000000; } & { sleep 1; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_3 wait-for-connection=false shm-size=100000000; }& { sleep 1; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_4 wait-for-connection=false shm-size=100000000; } & { sleep 1; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_5 wait-for-connection=false shm-size=100000000; } & { sleep 1; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_6 wait-for-connection=false shm-size=100000000; }  &jobs
+
+
+
+gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=t
+rue  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_1 wait-for-connection=false shm-size=100000000
+
+
+
+
+testing --- 
+
+{ sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-1 wait-for-connection=false shm-size=100000000; } & { sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-2 wait-for-connection=false shm-size=100000000; } & { sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-3 wait-for-connection=false shm-size=100000000; }& { sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-4 wait-for-connection=false shm-size=100000000; } & { sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-5 wait-for-connection=false shm-size=100000000; } & { sleep 2; gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/tmp/presien-shmsrc-6 wait-for-connection=false shm-size=100000000; }  &jobs
+
+
+
+sudo killall -9 gst-launch-1.0 && rm /dev/shm/* 
+
+
+ls -lad /dev/shm/*
+rm -f /dev/shm/vpp_*
+
+building code -----------
+cmake .. -DCMAKE_PREFIX_PATH=/home/orin-edge/.local && make -j4
+
+run vpp -------------
+unset DISPLAY && cereal_set blindsight_global_config ../extras/sample6_vpp.json && make -j6 && ./presien_vpp -r 6379 --use-bsight-global-config
+
+unset DISPLAY && cereal_set blindsight_global_config ../extras/newsample6_vpp.json && cmake .. -DCMAKE_PREFIX_PATH=/home/orin-edge/.local && make -j6 && ./src/presien_vpp -r 6379 --use-bsight-global-config
+
+
+below command create shm socket file inside /dev/shm/
+python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/dev/shm/test')"
+
+
+``````````````````````````working display of the files using cli commands
+producer -----
+gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_1_30fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_1 wait-for-connection=false shm-size=100000000
+
+2.
+gst-launch-1.0 multifilesrc location=$HOME/myspace/git/blindsight-embedded/sample_videos/sample_2_20fps.mp4 loop=true  ! h264parse ! nvv4l2decoder ! nvvidconv ! videoscale ! "video/x-raw,format=NV12,width=640,height=480" ! tee name=t ! queue ! shmsink socket-path=/dev/shm/vpp_sock_1 wait-for-connection=false shm-size=100000000
+
+
+consumer -----
+gst-launch-1.0 shmsrc socket-path=/dev/shm/vpp_sock_1 ! 'video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, framerate=(fraction)30/1'! queue ! nvvideoconvert ! "video/x-raw,format=NV12,width=640,height=480" ! autovideosink
+
+--jpeg
+from Nick
+gst-launch-1.0 videotestsrc ! "video/x-raw,format=NV12,width=640,height=480,framerate=30/1" ! videorate max-rate=1 ! "video/x-raw,format=NV12,width=640,height=480,framerate=1/2" ! jpegenc ! multifilesink location=/home/presien-nic/presien_folder/working_dir/test_img_save/img_%d.jpg sync=true
+
+--from shmsrc
+working...
+gst-launch-1.0 shmsrc socket-path=/dev/shm/vpp_sock_1 ! 'video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, framerate=(fraction)30/1' ! jpegenc ! multifilesink location=$HOME/Downloads/test_img_save/img_%d.jpg sync=true
+
+--working....
+only working with shmsrc caps without features
+gst-launch-1.0 shmsrc socket-path=/dev/shm/vpp_sock_1 ! "video/x-raw,format=NV12,width=640,height=480,framerate=(fraction)30/1" ! queue ! nvvideoconvert ! "video/x-raw(memory:NVMM),format=NV12,width=640,height=480" ! nvjpegenc ! multifilesink location=$HOME/Downloads/test_img_save/img_%d.jpg
+
+
+crash - if producer is nvmm and consumer has shmsrc caps as nvmm and then u need nvconverter with caps+featuer ->nvjpegenc not jpegenc ----<<< this below crash
+gst-launch-1.0 shmsrc socket-path=/dev/shm/vpp_sock_1 ! "video/x-raw(memory:NVMM),format=NV12,width=640,height=480,framerate=(fraction)30/1" ! nvjpegenc ! multifilesink location=$HOME/Downloads/test_img_save/img_%d.jpg
