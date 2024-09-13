@@ -63,6 +63,12 @@ For faster boot and larger disk space move the filesystem to NVME on M.2 port, u
 
 >>create disk partition from UI
 
+Errors encounter during flashing 
+1. USB write faile
+>>> reboot , change cable, powercyclec multiple attempt it worked.
+>>> 
+
+
 and run command 
 
 sudo ./change-rootfs-storage.sh /dev/nvme0n1p1
