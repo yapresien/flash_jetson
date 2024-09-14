@@ -1,0 +1,170 @@
+    1  sudo apt-get update
+    2  sudo apt upgrade
+    3  ll
+    4  cd jetson/
+    5  ll
+    6  mkdir bkup
+    7  cd bkup
+    8  pwd
+    9  rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' /media/master/Transcend2TB/jetson/bkup/13-sep/
+   10  mkdir 13-sep
+   11  rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' /media/master/Transcend2TB/jetson/bkup/13-sep/
+   12  sudo rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' /media/master/Transcend2TB/jetson/bkup/13-sep/
+   13  sudo rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' / /media/master/Transcend2TB/jetson/bkup/13-sep/
+   14  ll
+   15  cd 13-sep/
+   16  ll
+   17  cd ..
+   18  nano
+   19  sudo apt install nano vim
+   20  nano rsync.txt
+   21  exit
+   22  sudo apt-get install rsync
+   23  sudo reboot
+   24  java -version
+   25  sudo apt install default-jdk
+   26  cd ..
+   27  cd master/
+   28  mkdir myspace
+   29  mkdir presien_git
+   30  cd ~/myspace/presien_git/blindsight-embedded/
+   31  ll
+   32  git pull
+   33  git branch -r |grep virtual
+   34  git checkout -b BSIGHT-1457-support-virtual-blindsight-new-runtime-config origin/BSIGHT-1457-support-virtual-blindsight-new-runtime-config
+   35  git pull
+   36  cd common/dependencies/
+   37  ll
+   38  ./install_dev_deps.sh 
+   39  sudo ./install_dev_deps.sh 
+   40  ll
+   41  cd scripts/
+   42  ll
+   43  ./install_all.sh ~/Downloads/dependencies /home/master/.local
+   44  nvcc --version
+   45  sudo apt-get install python3-pi
+   46  sudo apt-get install python3-pip
+   47  pip3 update
+   48  ./install_all.sh ~/Downloads/dependencies /home/master/.local
+   49  nano install_all.sh 
+   50  ./install_all.sh ~/Downloads/dependencies /home/master/.local
+   51  python3
+   52  source ~/.bashrc
+   53  nano ~/bashrc
+   54  nano ~/.bashrc
+   55  python3.12
+   56  pyenv install 3.12.3
+   57  ll ~/pyenv/versions/3.12.3/
+   58  vim ~/bashrc
+   59  vim ~/.bashrc
+   60  source ~/.bashrc
+   61  ./install_all.sh ~/Downloads/dependencies /home/master/.local
+   62  nano install_all.sh 
+   63  ll ~/Downloads/dependencies 
+   64  ./install_all.sh ~/Downloads/dependencies /home/master/.local
+   65  reboot
+   66  sudo apt install libssl1.1 libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstreamer-plugins-base1.0-dev libgstrtspserver-1.0-0 libjansson4 libyaml-cpp-dev
+   67  cd ~/Downloads/dependencies/
+   68  git clone https://github.com/edenhill/librdkafka.git
+   69  cd librdkafka/
+   70  git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a
+   71  ./configure
+   72  make -j6
+   73  sudo make install
+   74  sudo mkdir -p /opt/nvidia/deepstream/deepstream-6.2/lib
+   75  sudo cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.2/lib
+   76  cd /media/master/Transcend2TB/jetson/
+   77  ll
+   78  sudo tar -xvf deepstream_sdk_v6.2.0_jetson.tbz2 -C /
+   79  sudo tar -xvf deepstream_sdk_v6.2.0_jetson\ \(2\).tbz2 -C /
+   80  ll
+   81  cd bkup/
+   82  ll
+   83  mkdir 13-sep-vpp_compiled
+   84  cd ..
+   85  cd master/Downloads/
+   86  cd ~/myspace/presien_git/blindsight-embedded/common/cpp_packages/presien_vpp/
+   87  ./build.sh /home/master/.local/
+   88  cd ..
+   89  cd cereal/
+   90  ll
+   91  ./build.sh /home/master/.local/
+   92  cd ..
+   93  cd presien_proto_schema/
+   94  ./build.sh /home/master/.local/
+   95  ./install.sh /home/master/.local
+   96  cd ..
+   97  cd cereal/
+   98  ./build.sh /home/master/.local/
+   99  ./install.sh /home/master/.local
+  100  sudo ./install.sh /home/master/.local
+  101  cd ..
+  102  cd presien_vpp/
+  103  ./build.sh /home/master/.local/
+  104  sudo ldconfig
+  105  ./build.sh /home/master/.local/
+  106  sudo rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' / /media/master/Transcend2TB/jetson/bkup/13-sep-vpp_compiled/
+  107  cd ~/Downloads/dependencies/
+  108  ll
+  109  ls -la
+  110  ls -lrt
+  111  dd .
+  112  df .
+  113  cd ..
+  114  mv dependencies/ /media/master/Transcend2TB/jetson/
+  115  sudo rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' / /media/master/Transcend2TB/jetson/bkup/13-sep-vpp_compiled/
+  116  gp
+  117  cd ~/myspace/presien_git/blindsight-embedded/common/cpp_packages/presien_vpp/
+  118  ll
+  119  cd build/
+  120  pwd
+  121  nano ~/.bashrc
+  122  source ~/.bashrc 
+  123  cmake .. -DCMAKE_PREFIX_PATH=/home/master/.local
+  124  make -j6
+  125  gst-inspect-1.0 nvbufsurface
+  126  sudo find /opt -iname libnvbufsurface.so
+  127  sudo find /usr -iname libnvbufsurface.so
+  128  ls -ll /usr/lib/aarch64-linux-gnu/tegra/*
+  129  ls /usr/lib/aarch64-linux-gnu/tegra/libnvbufsurface.so
+  130  ll ls /usr/lib/aarch64-linux-gnu/tegra/libnvbufsurface.so
+  131  ll ls /usr/lib/aarch64-linux-gnu/tegra/*
+  132  sudo ll ls /usr/lib/aarch64-linux-gnu/tegra/*
+  133  sudo ls /usr/lib/aarch64-linux-gnu/tegra/*
+  134  cd  /usr/lib/aarch64-linux-gnu/tegra/
+  135  ll
+  136  sudo ldconfig
+  137  sudo cp libnvbufsurface.so /opt/nvidia/deepstream/deepstream-6.2/lib/
+  138  chown master master /opt/nvidia/deepstream/deepstream-6.2/lib/libnvbufsurface.so 
+  139  chown master:master /opt/nvidia/deepstream/deepstream-6.2/lib/libnvbufsurface.so 
+  140  sudo chown master:master /opt/nvidia/deepstream/deepstream-6.2/lib/libnvbufsurface.so 
+  141  ll
+  142  pwd
+  143  mv /opt/nvidia/deepstream/deepstream-6.2/lib/libnvbufsurface.so /opt/nvidia/deepstream/deepstream-6.2/lib/testlibnvbufsurface.so
+  144  sudo mv /opt/nvidia/deepstream/deepstream-6.2/lib/libnvbufsurface.so /opt/nvidia/deepstream/deepstream-6.2/lib/testlibnvbufsurface.so
+  145  gg
+  146  cmake .. -DCMAKE_PREFIX_PATH=/home/master/.local
+  147  make -j6
+  148  source ~/.bashrc
+  149  make -j6
+  150  echo $LD_LIBRARY_PATH
+  151  ll usr/lib/aarch64-linux-gnu/tegra
+  152  ll usr/lib/aarch64-linux-gnu/tegra/*
+  153  sudo ll usr/lib/aarch64-linux-gnu/tegra/*
+  154  sudo ls -ll usr/lib/aarch64-linux-gnu/tegra/*
+  155  ll /usr/lib/aarch64-linux-gnu/tegra/*
+  156  sudo chown master:master /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  157  make -j6
+  158  sudo ll /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  159  sudo ls /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  160  sudo ls -ll /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  161  sudo chown master:master /usr/lib/aarch64-linux-gnu/tegra/libnvbufsurface.so
+  162  make -j6
+  163  sudo ls -ll /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  164  sudo chown -h master:master /usr/lib/aarch64-linux-gnu/tegra/libnvbufsurface.so
+  165  sudo ls -ll /usr/lib/aarch64-linux-gnu/tegra/libnvbuf*
+  166  make -j6
+  167  clear
+  168  master
+  169  history
+  170  history > ~/Downloads/history2.install
